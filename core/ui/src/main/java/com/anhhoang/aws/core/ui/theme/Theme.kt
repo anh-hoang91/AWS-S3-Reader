@@ -1,6 +1,5 @@
-package com.anhhoang.aws.s3reader.ui.theme
+package com.anhhoang.aws.core.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

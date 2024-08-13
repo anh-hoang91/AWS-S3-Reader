@@ -1,4 +1,4 @@
-package com.anhhoang.aws.s3reader.ui.theme
+package com.anhhoang.aws.core.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

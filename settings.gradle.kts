@@ -18,6 +18,8 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "S3 Reader"
+rootProject.name = "S3-Reader"
 include(":app")
+include(":core:ui")
