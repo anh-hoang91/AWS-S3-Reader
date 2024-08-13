@@ -23,3 +23,5 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "S3-Reader"
 include(":app")
 include(":core:ui")
+include(":core:coroutines:executors")
+include(":core:coroutines:di")
