@@ -50,6 +50,7 @@ android {
 dependencies {
     implementation(projects.core.ui)
     implementation(projects.core.coroutines.di)
+    implementation(projects.core.local)
 
     implementation(libs.androidx.activity.compose)
 }

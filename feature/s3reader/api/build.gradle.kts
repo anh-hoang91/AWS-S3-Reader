@@ -1,13 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.google.dagger.hilt)
     alias(libs.plugins.google.ksp)
-    alias(libs.plugins.androidx.room)
 }
 
 android {
-    namespace = "com.anhhoang.aws.core.local"
+    namespace = "com.anhhoang.aws.feature.s3reader.api"
     compileSdk = 34
 
     defaultConfig {
@@ -33,19 +31,23 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
 }
 
 dependencies {
-    implementation(projects.feature.s3reader.api)
 
+    implementation(libs.kotlinx.coroutines)
     implementation(libs.androidx.room)
     implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.paging)
     ksp(libs.androidx.room.compiler)
-    implementation(libs.google.dagger.hilt.android)
-    ksp(libs.google.dagger.hilt.compiler)
     implementation(libs.androidx.paging.runtime)
+
+    testImplementation(projects.core.local)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.junit)
+    testImplementation(libs.androidx.room.test)
+    testImplementation(libs.androidx.paging.test)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.google.truth)
+    testImplementation(libs.turbine)
 }

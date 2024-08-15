@@ -13,6 +13,9 @@ daggerHilt = "2.51.1"
 ksp = "2.0.0-1.0.21"
 room = "2.6.1"
 paging = "3.3.2"
+robolectric = "4.12.2"
+turbine = "1.1.0"
+truth = "1.4.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,12 +35,18 @@ androidx-room = { group = "androidx.room", name = "room-runtime", version.ref = 
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+androidx-room-test = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging"}
+androidx-paging-test = { group = "androidx.paging", name = "paging-testing", version.ref = "paging"}
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 google-dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }
 google-dagger-hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "daggerHilt" }
 google-dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "daggerHilt" }
+google-truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinCoroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

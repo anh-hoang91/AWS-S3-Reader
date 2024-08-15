@@ -21,6 +21,6 @@ internal object DatabaseModule {
     ): AwsStorageDatabase = Room.databaseBuilder(
         context = context,
         klass = AwsStorageDatabase::class.java,
-        name = "aws-s3-storage.db",
+        name = "s3_reader.db",
     ).build()
 }
