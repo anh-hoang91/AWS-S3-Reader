@@ -9,12 +9,15 @@ import androidx.room.Query
 /** Data access object for interacting with the file data in the local database. */
 @Dao
 interface FileDataDao {
-    @Query("SELECT * FROM file_data WHERE parent = :parent")
-    suspend fun getFiles(parent: String? = null): PagingSource<Int, FileDataEntity>
+    @Query("SELECT * FROM file_data WHERE parent is null")
+    fun getBase(): List<FileDataEntity>
+
+    @Query("SELECT * FROM file_data WHERE (parent is NULL and :parent is NULL) OR parent = :parent")
+    fun getFiles(parent: String? = null): PagingSource<Int, FileDataEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFiles(files: List<FileDataEntity>)
 
-    @Query("DELETE FROM file_data WHERE parent = :parent")
-    suspend fun deleteFiles(parent: String? = null)
+    @Query("DELETE FROM file_data WHERE `key` = :key")
+    suspend fun deleteFiles(key: String? = null)
 }
