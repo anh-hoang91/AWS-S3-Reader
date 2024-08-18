@@ -61,7 +61,28 @@ class FileDataDaoTest {
         dao.insertFiles(listOf(parentEntity))
         dao.insertFiles(listOf(fileEntity, fileEntity2))
 
-        dao.deleteFiles("parent_key")
+        dao.deleteFile("parent_key")
+
+        val parentResult = Pager(
+            config = PagingConfig(5, 0),
+            pagingSourceFactory = { dao.getFiles() }
+        ).flow.asSnapshot()
+
+        val childResult = Pager(
+            config = PagingConfig(5, 0),
+            pagingSourceFactory = { dao.getFiles("parent_key") }
+        ).flow.asSnapshot()
+
+        assertThat(parentResult).isEmpty()
+        assertThat(childResult).isEmpty()
+    }
+
+    @Test
+    fun `deleteAll(), expect all files are deleted`() = runTest {
+        dao.insertFiles(listOf(parentEntity))
+        dao.insertFiles(listOf(fileEntity, fileEntity2))
+
+        dao.deleteAll()
 
         val parentResult = Pager(
             config = PagingConfig(5, 0),

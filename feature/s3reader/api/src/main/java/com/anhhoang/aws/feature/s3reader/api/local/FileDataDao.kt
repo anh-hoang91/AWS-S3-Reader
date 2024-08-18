@@ -19,5 +19,8 @@ interface FileDataDao {
     suspend fun insertFiles(files: List<FileDataEntity>)
 
     @Query("DELETE FROM file_data WHERE `key` = :key")
-    suspend fun deleteFiles(key: String? = null)
+    suspend fun deleteFile(key: String? = null)
+
+    @Query("DELETE FROM file_data")
+    suspend fun deleteAll()
 }

@@ -17,4 +17,8 @@ interface FileRepository {
      * @return True if there are more files to load for the path, false otherwise.
      */
     suspend fun loadFiles(parent: String? = null, startAfter: String? = null): Boolean
+
+    suspend fun saveUserSettings(accessKey: String, secretKey: String, region: String)
+
+    suspend fun clearUserSettings()
 }
