@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "17d65fdb78365a074ec684d08d209f70",
+    "identityHash": "a9635166dc83a907d48bea98fc10d087",
     "entities": [
       {
         "tableName": "file_data",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `parent` TEXT, `size` INTEGER NOT NULL, `lastModified` INTEGER NOT NULL, `type` TEXT NOT NULL, PRIMARY KEY(`key`), FOREIGN KEY(`parent`) REFERENCES `file_data`(`key`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `parent` TEXT, `size` INTEGER NOT NULL, `lastModified` INTEGER, `type` TEXT NOT NULL, PRIMARY KEY(`key`), FOREIGN KEY(`parent`) REFERENCES `file_data`(`key`) ON UPDATE CASCADE ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "key",
@@ -30,7 +30,7 @@
             "fieldPath": "lastModified",
             "columnName": "lastModified",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "type",
@@ -75,7 +75,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '17d65fdb78365a074ec684d08d209f70')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a9635166dc83a907d48bea98fc10d087')"
     ]
   }
 }

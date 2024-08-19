@@ -18,6 +18,9 @@ internal interface S3ReaderLocalDataSource {
     suspend fun deleteAllFiles()
 
     /** Get user settings from the local storage. */
+    suspend fun getUserSettings(): UserSettings
+
+    /** Get user settings from the local storage. */
     suspend fun saveUserSettings(userSettings: UserSettings)
 
     /** Get user settings from the local storage. */

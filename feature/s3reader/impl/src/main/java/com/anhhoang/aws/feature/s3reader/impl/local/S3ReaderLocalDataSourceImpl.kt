@@ -6,6 +6,7 @@ import com.anhhoang.aws.core.coroutines.executors.BlockingContext
 import com.anhhoang.aws.feature.s3reader.api.local.FileDataDao
 import com.anhhoang.aws.feature.s3reader.api.local.FileDataEntity
 import com.anhhoang.aws.feature.s3reader.impl.local.datastore.UserSettings
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -29,6 +30,10 @@ internal class S3ReaderLocalDataSourceImpl @Inject constructor(
 
     override suspend fun deleteAllFiles() = withContext(coroutineContext) {
         fileDataDao.deleteAll()
+    }
+
+    override suspend fun getUserSettings(): UserSettings = withContext(coroutineContext) {
+        userSettingsDataStore.data.first()
     }
 
     override suspend fun saveUserSettings(userSettings: UserSettings) {

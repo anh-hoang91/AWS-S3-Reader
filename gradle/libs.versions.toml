@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.2"
+awsAndroidSdk = "2.76.1"
 datastore = "1.1.1"
 kotlin = "2.0.0"
 kotlinCoroutines = "1.9.0-RC"
@@ -19,8 +20,12 @@ robolectric = "4.12.2"
 turbine = "1.1.0"
 truth = "1.4.2"
 mockk = "1.13.11"
+appcompat = "1.7.0"
+material = "1.12.0"
 
 [libraries]
+aws-android-sdk-core = { module = "com.amazonaws:aws-android-sdk-core", version.ref = "awsAndroidSdk" }
+aws-android-sdk-s3 = { module = "com.amazonaws:aws-android-sdk-s3", version.ref = "awsAndroidSdk" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -53,6 +58,8 @@ kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-seria
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

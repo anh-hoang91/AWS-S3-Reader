@@ -29,6 +29,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import java.time.Instant
 
+/** Tests for [S3ReaderLocalDataSourceImpl]. */
 @RunWith(RobolectricTestRunner::class)
 class S3ReaderLocalDataSourceImplTest {
     private val testDispatcher = StandardTestDispatcher()

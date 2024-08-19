@@ -1,12 +1,14 @@
 package com.anhhoang.aws.feature.s3reader.api.data
 
+import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import com.anhhoang.aws.feature.s3reader.api.data.model.FileData
+import kotlinx.coroutines.flow.Flow
 
 /** Repository for interacting with the s3 files. */
 interface FileRepository {
     /** Get paginated files. */
-    fun getFiles(parent: String? = null): PagingSource<Int, FileData>
+    fun getFiles(parent: String? = null): Flow<PagingData<FileData>>
 
     /**
      * Load more files from the server.
@@ -18,7 +20,9 @@ interface FileRepository {
      */
     suspend fun loadFiles(parent: String? = null, startAfter: String? = null): Boolean
 
+    /** Save the user's access settings. */
     suspend fun saveUserSettings(accessKey: String, secretKey: String, bucketName: String, region: String)
 
+    /** Clear up user's settings. */
     suspend fun clearUserSettings()
 }

@@ -27,6 +27,6 @@ data class FileDataEntity(
     val key: String,
     val parent: String?,
     val size: Long,
-    val lastModified: Instant,
+    val lastModified: Instant?,
     val type: FileType,
 )

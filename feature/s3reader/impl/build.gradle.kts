@@ -45,6 +45,8 @@ dependencies {
     ksp(libs.google.dagger.hilt.compiler)
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.datastore)
+    implementation(libs.aws.android.sdk.s3)
+    implementation(libs.aws.android.sdk.core)
 
     testImplementation(kotlin("test"))
     testImplementation(libs.junit)
