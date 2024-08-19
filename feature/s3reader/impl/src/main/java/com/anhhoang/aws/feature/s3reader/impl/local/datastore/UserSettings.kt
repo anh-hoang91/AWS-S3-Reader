@@ -7,5 +7,6 @@ import kotlinx.serialization.Serializable
 internal data class UserSettings(
     val accessKey: String = "",
     val secretKey: String = "",
+    val bucketName: String = "",
     val region: String = "eu-central-1",
 )

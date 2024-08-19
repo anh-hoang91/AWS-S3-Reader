@@ -18,7 +18,7 @@ interface FileRepository {
      */
     suspend fun loadFiles(parent: String? = null, startAfter: String? = null): Boolean
 
-    suspend fun saveUserSettings(accessKey: String, secretKey: String, region: String)
+    suspend fun saveUserSettings(accessKey: String, secretKey: String, bucketName: String, region: String)
 
     suspend fun clearUserSettings()
 }
