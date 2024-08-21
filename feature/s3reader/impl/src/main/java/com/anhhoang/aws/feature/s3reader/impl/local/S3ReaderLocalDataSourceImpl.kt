@@ -17,9 +17,10 @@ internal class S3ReaderLocalDataSourceImpl @Inject constructor(
     private val fileDataDao: FileDataDao,
     private val userSettingsDataStore: DataStore<UserSettings>
 ) : S3ReaderLocalDataSource {
-    override suspend fun saveFiles(files: List<FileDataEntity>) = withContext(coroutineContext) {
-        fileDataDao.insertFiles(files)
-    }
+    override suspend fun saveFiles(parent: String?, files: List<FileDataEntity>, hasMore: Boolean) =
+        withContext(coroutineContext) {
+            fileDataDao.deleteAndInsertFiles(parent, files, hasMore)
+        }
 
     override fun getFiles(parent: String?): PagingSource<Int, FileDataEntity> =
         fileDataDao.getFiles(parent)

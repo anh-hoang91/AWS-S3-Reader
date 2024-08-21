@@ -64,7 +64,7 @@ class S3ReaderLocalDataSourceImplTest {
 
     @Test
     fun `saveFiles(), expect insert files called on DAO`() = runTest(testDispatcher) {
-        sut.saveFiles(listOf(parentEntity, fileEntity))
+        sut.saveFiles(null, listOf(parentEntity, fileEntity), false)
 
         coVerify(exactly = 1) { dao.insertFiles(listOf(parentEntity, fileEntity)) }
     }

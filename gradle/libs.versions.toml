@@ -20,8 +20,8 @@ robolectric = "4.12.2"
 turbine = "1.1.0"
 truth = "1.4.2"
 mockk = "1.13.11"
-appcompat = "1.7.0"
-material = "1.12.0"
+androidxHilt = "1.2.0"
+workKtx = "2.9.0"
 
 [libraries]
 aws-android-sdk-core = { module = "com.amazonaws:aws-android-sdk-core", version.ref = "awsAndroidSdk" }
@@ -48,6 +48,10 @@ androidx-room-test = { group = "androidx.room", name = "room-testing", version.r
 androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging"}
 androidx-paging-test = { group = "androidx.paging", name = "paging-testing", version.ref = "paging"}
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-work-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workKtx" }
+androidx-work-testing = { group = "androidx.work", name = "work-testing", version.ref = "workKtx" }
+androidx-hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "androidxHilt" }
+androidx-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "androidxHilt" }
 google-dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }
 google-dagger-hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "daggerHilt" }
 google-dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "daggerHilt" }
@@ -58,8 +62,6 @@ kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-seria
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

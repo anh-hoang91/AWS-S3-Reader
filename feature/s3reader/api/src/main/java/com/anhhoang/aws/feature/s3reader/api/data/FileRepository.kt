@@ -20,8 +20,11 @@ interface FileRepository {
      */
     suspend fun loadFiles(parent: String? = null, startAfter: String? = null): Boolean
 
+    /** Check if the user have settings to access the bucket. */
+    suspend fun hasAccess(): Boolean
+
     /** Save the user's access settings. */
-    suspend fun saveUserSettings(accessKey: String, secretKey: String, bucketName: String, region: String)
+    suspend fun saveUserSettings(accessKey: String, secretKey: String, bucketName: String, region: String = "")
 
     /** Clear up user's settings. */
     suspend fun clearUserSettings()

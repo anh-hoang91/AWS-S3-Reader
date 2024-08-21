@@ -43,13 +43,12 @@ class FileRepositoryImpl @Inject internal constructor(
             networkDataSource
         }
 
-    override fun getFiles(parent: String?): Flow<PagingData<FileData>> =
-        Pager(
-            config = PagingConfig(pageSize = 30),
-            pagingSourceFactory = {
-                localDataSource.getFiles(parent)
-            },
-        ).flow.map { it.map { f -> f.toModel() } }
+    override fun getFiles(parent: String?): Flow<PagingData<FileData>> = Pager(
+        config = PagingConfig(pageSize = 30),
+        pagingSourceFactory = {
+            localDataSource.getFiles(parent)
+        },
+    ).flow.map { it.map { f -> f.toModel() } }
 
 
     override suspend fun loadFiles(parent: String?, startAfter: String?): Boolean {
@@ -78,10 +77,17 @@ class FileRepositoryImpl @Inject internal constructor(
             addAll(folders)
             addAll(files)
         }
+        val hasMore = result.nextContinuationToken != null
+        localDataSource.saveFiles(parent, fileEntities, hasMore)
 
-        localDataSource.saveFiles(fileEntities)
+        return hasMore
+    }
 
-        return result.nextContinuationToken != null
+    override suspend fun hasAccess(): Boolean {
+        val userSettings = localDataSource.getUserSettings()
+        return userSettings.accessKey.isNotEmpty() &&
+                userSettings.secretKey.isNotEmpty() &&
+                userSettings.bucketName.isNotEmpty()
     }
 
     override suspend fun saveUserSettings(
@@ -90,7 +96,9 @@ class FileRepositoryImpl @Inject internal constructor(
         bucketName: String,
         region: String,
     ) {
-        localDataSource.saveUserSettings(UserSettings(accessKey, secretKey, bucketName, region))
+        val regionName = region.ifEmpty { "eu-central-1" }
+
+        localDataSource.saveUserSettings(UserSettings(accessKey, secretKey, bucketName, regionName))
     }
 
     override suspend fun clearUserSettings() = localDataSource.clearUserSettings()

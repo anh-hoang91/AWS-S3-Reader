@@ -74,9 +74,8 @@ class FileRepositoryImplTest {
         assertThat(hasMore).isFalse()
 
         coVerify(exactly = 1) {
-            localDataSource.saveFiles(listOf(parentEntity, fileEntity, fileEntity2))
+            localDataSource.saveFiles(null, listOf(parentEntity, fileEntity, fileEntity2), false)
         }
-
     }
 
     @Test
