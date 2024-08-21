@@ -11,7 +11,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
-composeBom = "2024.06.00"
+composeBom = "2024.08.00"
 daggerHilt = "2.51.1"
 ksp = "2.0.0-1.0.21"
 room = "2.6.1"
@@ -21,7 +21,8 @@ turbine = "1.1.0"
 truth = "1.4.2"
 mockk = "1.13.11"
 androidxHilt = "1.2.0"
-workKtx = "2.9.0"
+workKtx = "2.9.1"
+composeNavigation = "2.8.0-rc01"
 
 [libraries]
 aws-android-sdk-core = { module = "com.amazonaws:aws-android-sdk-core", version.ref = "awsAndroidSdk" }
@@ -52,6 +53,8 @@ androidx-work-ktx = { group = "androidx.work", name = "work-runtime-ktx", versio
 androidx-work-testing = { group = "androidx.work", name = "work-testing", version.ref = "workKtx" }
 androidx-hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "androidxHilt" }
 androidx-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "androidxHilt" }
+androidx-hilt-nav-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHilt" }
+androidx-nav-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
 google-dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }
 google-dagger-hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "daggerHilt" }
 google-dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "daggerHilt" }

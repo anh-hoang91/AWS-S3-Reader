@@ -56,9 +56,11 @@ dependencies {
     implementation(projects.feature.s3reader.api)
     implementation(projects.feature.s3reader.di)
     implementation(projects.feature.s3reader.work)
+    implementation(projects.feature.s3reader.ui.api)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.work.ktx)
+    implementation(libs.androidx.nav.compose)
     implementation(libs.androidx.hilt.work)
     ksp(libs.androidx.hilt.compiler)
     implementation(libs.google.dagger.hilt.android)
