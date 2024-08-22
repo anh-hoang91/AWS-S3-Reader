@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.stateIn
 
 @HiltViewModel
 internal class S3ExplorerViewModel @Inject constructor(
-    syncService: SyncService,
+    private val syncService: SyncService,
     fileRepository: FileRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
@@ -55,4 +55,8 @@ internal class S3ExplorerViewModel @Inject constructor(
         started = SharingStarted.Lazily,
         initialValue = PagingData.empty()
     )
+
+    fun syncFiles() {
+        syncService.startOneTimeWork()
+    }
 }
