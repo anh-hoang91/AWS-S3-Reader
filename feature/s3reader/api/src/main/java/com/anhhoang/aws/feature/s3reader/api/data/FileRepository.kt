@@ -23,6 +23,9 @@ interface FileRepository {
     /** Check if the user have settings to access the bucket. */
     suspend fun hasAccess(): Boolean
 
+    /** Get a flow of the user's access settings. */
+    fun hasAccessFlow(): Flow<Boolean>
+
     /** Save the user's access settings. */
     suspend fun saveUserSettings(accessKey: String, secretKey: String, bucketName: String, region: String = "")
 

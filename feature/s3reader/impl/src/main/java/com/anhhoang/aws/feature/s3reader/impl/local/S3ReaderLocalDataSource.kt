@@ -3,6 +3,7 @@ package com.anhhoang.aws.feature.s3reader.impl.local
 import androidx.paging.PagingSource
 import com.anhhoang.aws.feature.s3reader.api.local.FileDataEntity
 import com.anhhoang.aws.feature.s3reader.impl.local.datastore.UserSettings
+import kotlinx.coroutines.flow.Flow
 
 /** Local data source for the s3 reader app. */
 internal interface S3ReaderLocalDataSource {
@@ -19,6 +20,9 @@ internal interface S3ReaderLocalDataSource {
 
     /** Get user settings from the local storage. */
     suspend fun getUserSettings(): UserSettings
+
+    /** Get user settings from the local storage. */
+    fun getUserSettingsFlow(): Flow<UserSettings>
 
     /** Get user settings from the local storage. */
     suspend fun saveUserSettings(userSettings: UserSettings)

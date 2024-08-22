@@ -83,12 +83,15 @@ class FileRepositoryImpl @Inject internal constructor(
         return hasMore
     }
 
-    override suspend fun hasAccess(): Boolean {
-        val userSettings = localDataSource.getUserSettings()
-        return userSettings.accessKey.isNotEmpty() &&
+    override suspend fun hasAccess(): Boolean = hasAccess(localDataSource.getUserSettings())
+
+    override fun hasAccessFlow(): Flow<Boolean> =
+        localDataSource.getUserSettingsFlow().map { hasAccess(it) }
+
+    private fun hasAccess(userSettings: UserSettings) =
+        userSettings.accessKey.isNotEmpty() &&
                 userSettings.secretKey.isNotEmpty() &&
                 userSettings.bucketName.isNotEmpty()
-    }
 
     override suspend fun saveUserSettings(
         accessKey: String,
