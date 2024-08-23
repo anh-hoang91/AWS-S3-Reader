@@ -37,6 +37,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.feature.s3reader.ui.explorer)
+
     implementation(libs.androidx.nav.compose)
     implementation(libs.kotlinx.serialization)
     implementation(libs.google.dagger.hilt.android)

@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.flow.Flow
 
 /** Implementation of [S3ReaderLocalDataSource] with local database and datastore. */
 internal class S3ReaderLocalDataSourceImpl @Inject constructor(
@@ -36,6 +37,9 @@ internal class S3ReaderLocalDataSourceImpl @Inject constructor(
     override suspend fun getUserSettings(): UserSettings = withContext(coroutineContext) {
         userSettingsDataStore.data.first()
     }
+
+    override fun getUserSettingsFlow(): Flow<UserSettings> =
+        userSettingsDataStore.data
 
     override suspend fun saveUserSettings(userSettings: UserSettings) {
         userSettingsDataStore.updateData { userSettings }

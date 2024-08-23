@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.ui)
     implementation(projects.feature.s3reader.api)
     implementation(projects.feature.s3reader.work)
 

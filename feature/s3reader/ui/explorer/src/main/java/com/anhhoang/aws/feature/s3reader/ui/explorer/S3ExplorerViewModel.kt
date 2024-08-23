@@ -13,11 +13,12 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 internal class S3ExplorerViewModel @Inject constructor(
     private val syncService: SyncService,
-    fileRepository: FileRepository,
+    private val fileRepository: FileRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     val parentKey: String? = savedStateHandle["parentKey"]
@@ -58,5 +59,11 @@ internal class S3ExplorerViewModel @Inject constructor(
 
     fun syncFiles() {
         syncService.startOneTimeWork()
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            fileRepository.clearUserSettings()
+        }
     }
 }
