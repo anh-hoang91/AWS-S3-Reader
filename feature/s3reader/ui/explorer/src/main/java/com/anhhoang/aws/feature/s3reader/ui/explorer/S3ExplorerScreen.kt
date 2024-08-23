@@ -135,7 +135,7 @@ private fun S3ExplorerScreen(
                 .fillMaxSize()
                 .nestedScroll(pullToRefreshState.nestedScrollConnection)
         ) {
-            Column(modifier = Modifier.fillMaxSize()) {
+            Column(modifier = Modifier.fillMaxWidth()) {
                 ErrorView(hasError = hasError, onRetryClick = onSync)
                 FilesList(files = files, onItemClicked = onNavigateToFolder)
             }
@@ -297,7 +297,6 @@ private fun SyncView(
 
 @Composable
 private fun HandleLoginState(hasAccess: Boolean, onNavigateToLogin: () -> Unit) {
-    Log.d("TEST", "hasAccess: $hasAccess")
     if (!hasAccess) {
         LaunchedEffect(Unit) {
             onNavigateToLogin()

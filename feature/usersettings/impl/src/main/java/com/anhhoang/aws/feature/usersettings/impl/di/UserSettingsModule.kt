@@ -35,7 +35,7 @@ internal object UserSettingsModule {
     ): DataStore<UserSettings> = DataStoreFactory.create(
         serializer = serializer,
         scope = CoroutineScope(coroutineContext),
-        produceFile = { context.dataStoreFile("user_settings") }
+        produceFile = { context.dataStoreFile("user_settings.txt") }
     )
 }
 

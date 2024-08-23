@@ -5,6 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import androidx.work.WorkInfo
 import com.anhhoang.aws.feature.s3reader.api.data.FileRepository
 import com.anhhoang.aws.feature.s3reader.work.SyncService
@@ -14,6 +15,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -24,7 +26,7 @@ internal class S3ExplorerViewModel @Inject constructor(
     private val userSettingsRepository: UserSettingsRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    val parentKey: String? = savedStateHandle["parentKey"]
+    val parentKey: String? = savedStateHandle["parent"]
 
     private val syncInfo = merge(
         syncService.getExistingOneTimeWorkResourceState(),
@@ -32,10 +34,6 @@ internal class S3ExplorerViewModel @Inject constructor(
     )
 
     val hasAccess = userSettingsRepository.hasAccessFlow()
-        .map {
-            Log.d("S3ExplorerViewModel", "hasAccess: $it")
-            it
-        }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,
@@ -58,14 +56,10 @@ internal class S3ExplorerViewModel @Inject constructor(
         initialValue = false,
     )
 
-    val files = fileRepository.getFiles(parentKey).stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Lazily,
-        initialValue = PagingData.empty()
-    )
+    val files = fileRepository.getFiles(parentKey).cachedIn(viewModelScope)
 
     fun syncFiles() {
-        syncService.startOneTimeWork()
+        syncService.startOneTimeWork(parentKey)
     }
 
     fun logout() {

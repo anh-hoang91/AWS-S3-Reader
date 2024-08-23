@@ -2,6 +2,7 @@ package com.anhhoang.aws.feature.s3reader.work
 
 import android.content.Context
 import androidx.work.BackoffPolicy
+import androidx.work.Data
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
@@ -48,16 +49,24 @@ class SyncService @Inject internal constructor(
             )
             .build()
 
-    fun startOneTimeWork() {
+    fun startOneTimeWork(parent: String? = null) {
         WorkManager.getInstance(context).enqueueUniqueWork(
             ONE_TIME_WORK_NAME,
             ExistingWorkPolicy.KEEP,
-            buildOneTimeWorkRequest(),
+            buildOneTimeWorkRequest(parent),
         )
     }
 
-    private fun buildOneTimeWorkRequest(): OneTimeWorkRequest =
-        OneTimeWorkRequestBuilder<SyncWorker>().setId(ONE_TIME_ID).build()
+    private fun buildOneTimeWorkRequest(parent: String? = null): OneTimeWorkRequest {
+        val builder = OneTimeWorkRequestBuilder<SyncWorker>().setId(ONE_TIME_ID)
+
+        if (parent != null) {
+            builder.setInputData(Data.Builder().putString(SyncWorker.PARENT_KEY, parent).build())
+        }
+
+        return builder.build()
+    }
+
 
     private companion object {
         private const val PERIODIC_WORK_NAME = "PeriodicSyncWorker"

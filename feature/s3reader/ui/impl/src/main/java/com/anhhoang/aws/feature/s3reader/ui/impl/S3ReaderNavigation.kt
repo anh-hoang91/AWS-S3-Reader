@@ -21,7 +21,6 @@ class S3ReaderNavigation @Inject internal constructor() : NavSubGraph {
                     onNavigateToLogin = {
                         navController.navigate(UserSettingsGraph) {
                             popUpTo(navController.graph.id) { inclusive = true }
-                            launchSingleTop = true
                         }
                     },
                     onNavigateToFolder = { navController.navigate(S3FileExplorerDestination(it)) },
