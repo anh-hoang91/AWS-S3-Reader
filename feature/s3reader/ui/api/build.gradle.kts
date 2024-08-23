@@ -3,8 +3,6 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.jetbrains.kotlin.serialization)
-    alias(libs.plugins.google.dagger.hilt)
-    alias(libs.plugins.google.ksp)
 }
 
 android {
@@ -37,12 +35,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.feature.usersettings.ui.api)
     implementation(projects.feature.s3reader.ui.explorer)
 
     implementation(libs.androidx.nav.compose)
     implementation(libs.kotlinx.serialization)
-    implementation(libs.google.dagger.hilt.android)
-    ksp(libs.google.dagger.hilt.compiler)
-
-    debugImplementation(libs.androidx.ui.test.manifest)
 }

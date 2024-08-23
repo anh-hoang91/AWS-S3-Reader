@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.anhhoang.aws.core.ui.theme.S3ReaderTheme
 import com.anhhoang.aws.feature.s3reader.ui.api.S3ReaderGraph
 import com.anhhoang.aws.feature.s3reader.ui.api.addS3ReaderNavigation
+import com.anhhoang.aws.feature.usersettings.ui.api.addUserSettingsNavigation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = S3ReaderGraph) {
                     addS3ReaderNavigation(navController)
+                    addUserSettingsNavigation(navController)
                 }
             }
         }

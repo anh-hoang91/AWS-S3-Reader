@@ -1,4 +1,4 @@
-package com.anhhoang.aws.feature.s3reader.impl.common
+package com.anhhoang.aws.feature.usersettings.impl.common
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties

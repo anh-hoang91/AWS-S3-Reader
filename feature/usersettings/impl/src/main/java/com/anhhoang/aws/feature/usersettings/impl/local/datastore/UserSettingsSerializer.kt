@@ -1,7 +1,8 @@
-package com.anhhoang.aws.feature.s3reader.impl.local.datastore
+package com.anhhoang.aws.feature.usersettings.impl.local.datastore
 
 import androidx.datastore.core.Serializer
-import com.anhhoang.aws.feature.s3reader.impl.common.CryptoService
+import com.anhhoang.aws.feature.usersettings.api.data.UserSettings
+import com.anhhoang.aws.feature.usersettings.impl.common.CryptoService
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import java.io.InputStream

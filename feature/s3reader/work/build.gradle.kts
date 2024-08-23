@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(projects.feature.s3reader.api)
+    implementation(projects.feature.usersettings.api)
 
     implementation(libs.androidx.work.ktx)
     implementation(libs.androidx.hilt.work)

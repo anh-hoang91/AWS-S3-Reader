@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.work.WorkInfo
 import com.anhhoang.aws.feature.s3reader.api.data.FileRepository
 import com.anhhoang.aws.feature.s3reader.work.SyncService
+import com.anhhoang.aws.feature.usersettings.api.data.UserSettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 internal class S3ExplorerViewModel @Inject constructor(
     private val syncService: SyncService,
     private val fileRepository: FileRepository,
+    private val userSettingsRepository: UserSettingsRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     val parentKey: String? = savedStateHandle["parentKey"]
@@ -28,7 +30,7 @@ internal class S3ExplorerViewModel @Inject constructor(
         syncService.getExistingPeriodicWorkResourceState(),
     )
 
-    val hasAccess = fileRepository.hasAccessFlow()
+    val hasAccess = userSettingsRepository.hasAccessFlow()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,
@@ -63,7 +65,8 @@ internal class S3ExplorerViewModel @Inject constructor(
 
     fun logout() {
         viewModelScope.launch {
-            fileRepository.clearUserSettings()
+            fileRepository.deleteAllFiles()
+            userSettingsRepository.clearUserSettings()
         }
     }
 }

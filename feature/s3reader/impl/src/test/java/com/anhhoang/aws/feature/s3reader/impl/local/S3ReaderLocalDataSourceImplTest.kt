@@ -1,29 +1,19 @@
 package com.anhhoang.aws.feature.s3reader.impl.local
 
-import android.content.Context
-import android.security.keystore.KeyGenParameterSpec
-import androidx.datastore.core.DataStoreFactory
-import androidx.datastore.dataStoreFile
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.paging.testing.asSnapshot
-import androidx.test.core.app.ApplicationProvider
-import app.cash.turbine.test
 import com.anhhoang.aws.feature.s3reader.api.data.model.FileType
 import com.anhhoang.aws.feature.s3reader.api.local.FileDataDao
 import com.anhhoang.aws.feature.s3reader.api.local.FileDataEntity
-import com.anhhoang.aws.feature.s3reader.impl.local.datastore.UserSettings
-import com.anhhoang.aws.feature.s3reader.impl.local.datastore.UserSettingsSerializer
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -33,18 +23,11 @@ import java.time.Instant
 @RunWith(RobolectricTestRunner::class)
 class S3ReaderLocalDataSourceImplTest {
     private val testDispatcher = StandardTestDispatcher()
-    private val context = ApplicationProvider.getApplicationContext<Context>()
     private val dao = mockk<FileDataDao>(relaxed = true)
-    private val dataStore = DataStoreFactory.create(
-        scope = CoroutineScope(testDispatcher),
-        serializer = UserSettingsSerializer(),
-        produceFile = { context.dataStoreFile("test_file") }
-    )
 
     private val sut = S3ReaderLocalDataSourceImpl(
         coroutineContext = testDispatcher,
         fileDataDao = dao,
-        userSettingsDataStore = dataStore,
     )
 
     @Test

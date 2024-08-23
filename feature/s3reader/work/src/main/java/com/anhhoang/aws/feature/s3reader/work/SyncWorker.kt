@@ -6,6 +6,7 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.anhhoang.aws.feature.s3reader.api.data.FileRepository
+import com.anhhoang.aws.feature.usersettings.api.data.UserSettingsRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CancellationException
@@ -16,10 +17,11 @@ import kotlinx.coroutines.CancellationException
 class SyncWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
-    private val fileRepository: FileRepository
+    private val fileRepository: FileRepository,
+    private val userSettingsRepository: UserSettingsRepository,
 ) : CoroutineWorker(context, params) {
     override suspend fun doWork(): Result {
-        if (fileRepository.hasAccess().not()) {
+        if (!userSettingsRepository.hasAccess()) {
             return Result.failure()
         }
 

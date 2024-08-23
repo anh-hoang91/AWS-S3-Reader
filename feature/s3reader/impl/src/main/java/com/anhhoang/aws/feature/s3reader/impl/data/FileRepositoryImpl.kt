@@ -13,8 +13,8 @@ import com.anhhoang.aws.feature.s3reader.api.data.model.FileData
 import com.anhhoang.aws.feature.s3reader.api.data.model.FileType
 import com.anhhoang.aws.feature.s3reader.api.local.FileDataEntity
 import com.anhhoang.aws.feature.s3reader.impl.local.S3ReaderLocalDataSource
-import com.anhhoang.aws.feature.s3reader.impl.local.datastore.UserSettings
 import com.anhhoang.aws.feature.s3reader.impl.network.S3ReaderNetworkDataSource
+import com.anhhoang.aws.feature.usersettings.api.data.UserSettingsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
@@ -26,6 +26,7 @@ class FileRepositoryImpl @Inject internal constructor(
     @LightweightContext private val coroutineContext: CoroutineContext,
     private val localDataSource: S3ReaderLocalDataSource,
     private val networkDataSourceFactory: S3ReaderNetworkDataSource.Factory,
+    private val userSettingsRepository: UserSettingsRepository,
 ) : FileRepository {
 
     private lateinit var networkDataSource: S3ReaderNetworkDataSource
@@ -33,7 +34,7 @@ class FileRepositoryImpl @Inject internal constructor(
     private suspend fun getNetworkDataSource(): S3ReaderNetworkDataSource =
         if (!this::networkDataSource.isInitialized) {
             withContext(coroutineContext) {
-                val userSettings = localDataSource.getUserSettings()
+                val userSettings = userSettingsRepository.getUserSettings()
                 val credentials =
                     BasicAWSCredentials(userSettings.accessKey, userSettings.secretKey)
                 val s3Client = AmazonS3Client(credentials, Region.getRegion(userSettings.region))
@@ -83,26 +84,7 @@ class FileRepositoryImpl @Inject internal constructor(
         return hasMore
     }
 
-    override suspend fun hasAccess(): Boolean = hasAccess(localDataSource.getUserSettings())
-
-    override fun hasAccessFlow(): Flow<Boolean> =
-        localDataSource.getUserSettingsFlow().map { hasAccess(it) }
-
-    private fun hasAccess(userSettings: UserSettings) =
-        userSettings.accessKey.isNotEmpty() &&
-                userSettings.secretKey.isNotEmpty() &&
-                userSettings.bucketName.isNotEmpty()
-
-    override suspend fun saveUserSettings(
-        accessKey: String,
-        secretKey: String,
-        bucketName: String,
-        region: String,
-    ) {
-        val regionName = region.ifEmpty { "eu-central-1" }
-
-        localDataSource.saveUserSettings(UserSettings(accessKey, secretKey, bucketName, regionName))
+    override suspend fun deleteAllFiles() {
+        localDataSource.deleteAllFiles()
     }
-
-    override suspend fun clearUserSettings() = localDataSource.clearUserSettings()
 }

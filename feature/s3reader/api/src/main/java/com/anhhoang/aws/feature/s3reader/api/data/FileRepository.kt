@@ -20,15 +20,6 @@ interface FileRepository {
      */
     suspend fun loadFiles(parent: String? = null, startAfter: String? = null): Boolean
 
-    /** Check if the user have settings to access the bucket. */
-    suspend fun hasAccess(): Boolean
-
-    /** Get a flow of the user's access settings. */
-    fun hasAccessFlow(): Flow<Boolean>
-
-    /** Save the user's access settings. */
-    suspend fun saveUserSettings(accessKey: String, secretKey: String, bucketName: String, region: String = "")
-
-    /** Clear up user's settings. */
-    suspend fun clearUserSettings()
+    /** Delete all files. */
+    suspend fun deleteAllFiles()
 }

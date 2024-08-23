@@ -42,6 +42,7 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.feature.s3reader.api)
     implementation(projects.feature.s3reader.work)
+    implementation(projects.feature.usersettings.api)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.core.ktx)

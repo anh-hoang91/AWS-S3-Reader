@@ -53,10 +53,11 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.core.coroutines.di)
     implementation(projects.core.local)
-    implementation(projects.feature.s3reader.api)
     implementation(projects.feature.s3reader.di)
     implementation(projects.feature.s3reader.work)
     implementation(projects.feature.s3reader.ui.api)
+    implementation(projects.feature.usersettings.di)
+    implementation(projects.feature.usersettings.ui.api)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.work.ktx)

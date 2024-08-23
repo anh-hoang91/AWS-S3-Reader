@@ -9,16 +9,15 @@ import com.anhhoang.aws.feature.s3reader.api.data.model.FileData
 import com.anhhoang.aws.feature.s3reader.api.data.model.FileType
 import com.anhhoang.aws.feature.s3reader.api.local.FileDataEntity
 import com.anhhoang.aws.feature.s3reader.impl.local.S3ReaderLocalDataSource
-import com.anhhoang.aws.feature.s3reader.impl.local.datastore.UserSettings
 import com.anhhoang.aws.feature.s3reader.impl.network.S3ReaderNetworkDataSource
-import com.google.common.base.Verify.verify
+import com.anhhoang.aws.feature.usersettings.api.data.UserSettings
+import com.anhhoang.aws.feature.usersettings.api.data.UserSettingsRepository
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -35,16 +34,18 @@ class FileRepositoryImplTest {
     private val networkDataSource = mockk<S3ReaderNetworkDataSource>(relaxed = true)
     private val networkDataSourceFactory =
         S3ReaderNetworkDataSource.Factory { _, _ -> networkDataSource }
+    private val userSettingsRepository = mockk<UserSettingsRepository>(relaxed = true)
 
     private val sut = FileRepositoryImpl(
         coroutineContext = testDispatcher,
         localDataSource = localDataSource,
-        networkDataSourceFactory = networkDataSourceFactory
+        networkDataSourceFactory = networkDataSourceFactory,
+        userSettingsRepository = userSettingsRepository
     )
 
     @Before
     fun setUp() {
-        coEvery { localDataSource.getUserSettings() } returns UserSettings(
+        coEvery { userSettingsRepository.getUserSettings() } returns UserSettings(
             "accessKey", "secretKey", "bucketName", "eu-central-1"
         )
     }
@@ -79,19 +80,10 @@ class FileRepositoryImplTest {
     }
 
     @Test
-    fun saveUserSettings() = runTest(testDispatcher) {
-        sut.saveUserSettings("test", "test", "test", "test")
+    fun `deleteAllFiles(), expect files deletion invoked`() = runTest(testDispatcher) {
+        sut.deleteAllFiles()
 
-        coVerify(exactly = 1) {
-            localDataSource.saveUserSettings(UserSettings("test", "test", "test", "test"))
-        }
-    }
-
-    @Test
-    fun clearUserSettings() = runTest(testDispatcher) {
-        sut.clearUserSettings()
-
-        coVerify(exactly = 1) { localDataSource.clearUserSettings() }
+        coVerify(exactly = 1) { localDataSource.deleteAllFiles() }
     }
 
     private companion object {

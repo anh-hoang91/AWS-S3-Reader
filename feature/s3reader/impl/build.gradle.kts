@@ -38,13 +38,13 @@ android {
 dependencies {
     implementation(projects.core.coroutines.executors)
     implementation(projects.feature.s3reader.api)
+    implementation(projects.feature.usersettings.api)
 
     implementation(libs.kotlinx.coroutines)
     implementation(libs.kotlinx.serialization)
     implementation(libs.google.dagger.hilt.android)
     ksp(libs.google.dagger.hilt.compiler)
     implementation(libs.androidx.paging.runtime)
-    implementation(libs.androidx.datastore)
     implementation(libs.aws.android.sdk.s3)
     implementation(libs.aws.android.sdk.core)
 
