@@ -2,6 +2,7 @@ package com.anhhoang.aws.feature.s3reader.ui.explorer
 
 import android.text.format.DateUtils
 import android.text.format.Formatter
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -110,9 +111,7 @@ private fun S3ExplorerScreen(
                 IconButton(onClick = onNavigateBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = stringResource(
-                            R.string.back
-                        )
+                        contentDescription = stringResource(R.string.back)
                     )
                 }
             },
@@ -200,7 +199,7 @@ fun FileItem(file: FileData, onItemClicked: () -> Unit) {
     val context = LocalContext.current
     Column(modifier = Modifier
         .fillMaxWidth()
-        .clickable { onItemClicked() }) {
+        .clickable { if (file.type == FileType.FOLDER) onItemClicked() }) {
         Row(
             modifier = Modifier.fillMaxWidth(),
         ) {
@@ -298,6 +297,7 @@ private fun SyncView(
 
 @Composable
 private fun HandleLoginState(hasAccess: Boolean, onNavigateToLogin: () -> Unit) {
+    Log.d("TEST", "hasAccess: $hasAccess")
     if (!hasAccess) {
         LaunchedEffect(Unit) {
             onNavigateToLogin()

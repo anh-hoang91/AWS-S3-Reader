@@ -8,5 +8,5 @@ data class UserSettings(
     val accessKey: String = "",
     val secretKey: String = "",
     val bucketName: String = "",
-    val region: String = "eu-central-1",
+    val region: String = "",
 )

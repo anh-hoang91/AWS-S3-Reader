@@ -36,15 +36,13 @@ class UserSettingsRepositoryImpl @Inject internal constructor(
         secretKey: String,
         bucketName: String,
         region: String,
-    ) {
-        val regionName = region.ifEmpty { "eu-central-1" }
-
+    ) = withContext(coroutineContext) {
         localDataSource.saveUserSettings(
             UserSettings(
                 accessKey,
                 secretKey,
                 bucketName,
-                regionName
+                region
             )
         )
     }

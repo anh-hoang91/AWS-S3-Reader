@@ -1,5 +1,6 @@
 package com.anhhoang.aws.feature.s3reader.ui.explorer
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -31,6 +32,10 @@ internal class S3ExplorerViewModel @Inject constructor(
     )
 
     val hasAccess = userSettingsRepository.hasAccessFlow()
+        .map {
+            Log.d("S3ExplorerViewModel", "hasAccess: $it")
+            it
+        }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,

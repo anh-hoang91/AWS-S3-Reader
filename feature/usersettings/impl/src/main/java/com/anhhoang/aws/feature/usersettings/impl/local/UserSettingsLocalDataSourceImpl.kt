@@ -28,7 +28,5 @@ internal class UserSettingsLocalDataSourceImpl @Inject constructor(
         userSettingsDataStore.updateData { userSettings }
     }
 
-    override suspend fun clearUserSettings() {
-        userSettingsDataStore.updateData { UserSettings() }
-    }
+    override suspend fun clearUserSettings() = saveUserSettings(UserSettings())
 }

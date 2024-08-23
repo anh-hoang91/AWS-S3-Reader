@@ -16,6 +16,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
+import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
 @InstallIn(SingletonComponent::class)
@@ -26,6 +27,7 @@ internal object UserSettingsModule {
     // it gives control and testability over the DataStore, in case hilt testing with real
     // instance is employed. Basically just a good practice that costs absolutely nothing.
     @Provides
+    @Singleton
     fun provideDataStore(
         @ApplicationContext context: Context,
         @BlockingContext coroutineContext: CoroutineContext,

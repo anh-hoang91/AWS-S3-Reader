@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.anhhoang.aws.feature.usersettings.ui.impl"
+    namespace = "com.anhhoang.aws.feature.usersettings.ui.settings"
     compileSdk = 34
 
     defaultConfig {
@@ -36,12 +36,21 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.nav)
-    implementation(projects.feature.s3reader.ui.api)
-    implementation(projects.feature.usersettings.ui.api)
-    implementation(projects.feature.usersettings.ui.settings)
+    implementation(projects.feature.usersettings.api)
+    implementation(projects.feature.s3reader.work)
 
-    implementation(libs.androidx.nav.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.google.dagger.hilt.android)
     ksp(libs.google.dagger.hilt.compiler)
+    implementation(libs.androidx.hilt.nav.compose)
+    implementation(libs.aws.android.sdk.core)
 }
