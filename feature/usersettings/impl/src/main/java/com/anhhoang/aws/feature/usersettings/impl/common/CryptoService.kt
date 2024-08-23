@@ -2,6 +2,8 @@ package com.anhhoang.aws.feature.usersettings.impl.common
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
+import android.util.Log
+import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 import java.security.KeyStore
@@ -59,25 +61,24 @@ internal object CryptoService {
     }
 
     fun encrypt(bytes: ByteArray, outputStream: OutputStream): ByteArray {
-        val encryptedBytes = encryptCipher.doFinal(bytes)
+        val cipher = encryptCipher
+        val encryptedBytes = cipher.doFinal(bytes)
         outputStream.use {
-            it.write(encryptCipher.iv.size)
-            it.write(encryptCipher.iv)
-            it.write(encryptedBytes.size)
+            it.write(cipher.iv.size)
+            it.write(cipher.iv)
             it.write(encryptedBytes)
         }
         return encryptedBytes
     }
 
-    fun decrypt(inputStream: InputStream): ByteArray = inputStream.use {
-        val ivSize = it.read()
+    fun decrypt(inputStream: InputStream): ByteArray {
+        val ivSize = inputStream.read()
         val iv = ByteArray(ivSize)
-        it.read(iv)
+        inputStream.read(iv)
 
-        val encryptedBytesSize = it.read()
-        val encryptedBytes = ByteArray(encryptedBytesSize)
-        it.read(encryptedBytes)
+        val encryptedBytes = inputStream.readBytes()
 
-        getDecryptCipherForIv(iv).doFinal(encryptedBytes)
+        val cipher = getDecryptCipherForIv(iv)
+        return cipher.doFinal(encryptedBytes)
     }
 }
