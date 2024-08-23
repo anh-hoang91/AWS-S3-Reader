@@ -34,7 +34,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.feature.s3reader.ui.api)
 
     implementation(libs.androidx.nav.compose)
     implementation(libs.kotlinx.serialization)

@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 // should navigate to the sub-graph in combination with deep link if more specific screen is needed.
 /** Destination for file explorer screen. */
 @Serializable
-internal data class S3FileExplorerDestination(val parent: String? = null)
+data class S3FileExplorerDestination(val parent: String? = null)
 
 /** Destination for S3 reader feature sub-graph. */
 @Serializable
-object S3ReaderGraph
+object S3ReaderGraphDestination

@@ -35,8 +35,10 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.nav)
     implementation(projects.feature.s3reader.api)
     implementation(projects.feature.s3reader.impl)
+    implementation(projects.feature.s3reader.ui.impl)
 
     implementation(libs.google.dagger.hilt.android)
     ksp(libs.google.dagger.hilt.compiler)

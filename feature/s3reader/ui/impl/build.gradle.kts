@@ -1,12 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.google.dagger.hilt)
     alias(libs.plugins.google.ksp)
 }
 
 android {
-    namespace = "com.anhhoang.aws.feature.usersettings.di"
+    namespace = "com.anhhoang.aws.feature.s3reader.ui.impl"
     compileSdk = 34
 
     defaultConfig {
@@ -36,10 +37,11 @@ android {
 
 dependencies {
     implementation(projects.core.nav)
-    implementation(projects.feature.usersettings.api)
-    implementation(projects.feature.usersettings.impl)
-    implementation(projects.feature.usersettings.ui.impl)
+    implementation(projects.feature.s3reader.ui.api)
+    implementation(projects.feature.s3reader.ui.explorer)
+    implementation(projects.feature.usersettings.ui.api)
 
+    implementation(libs.androidx.nav.compose)
     implementation(libs.google.dagger.hilt.android)
     ksp(libs.google.dagger.hilt.compiler)
 }

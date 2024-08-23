@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 /** Destination for user settings screen. */
 @Serializable
-internal object UserSettingsDestination
+object UserSettingsDestination
 
 /** Destination for user settings sub-graph. */
 @Serializable
