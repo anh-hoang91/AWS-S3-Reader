@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="invalid_input">Input must not be empty or consist of white spaces only</string>
+    <string name="clear_input">Clear input</string>
+    <string name="save">Save</string>
+    <string name="access_id">Access Id</string>
+    <string name="enter_access_id">Enter access id</string>
+    <string name="secret_key">Secret Key</string>
+    <string name="enter_secret_key">Enter secret key</string>
+    <string name="bucket_name">Bucket Name</string>
+    <string name="enter_bucket_name">Enter bucket name</string>
+    <string name="region">Region</string>
+    <string name="select_region">Select region</string>
+    <string name="expand_regions">Expand regions</string>
+    <string name="collapse_regions">Collapse regions</string>
+</resources>
